@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects · Hasiniverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+:root { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
+[hidden] { display: none !important; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.filters button {
+  font: 500 .92rem var(--body); padding: 8px 16px; border-radius: 999px; cursor: pointer;
+  border: 1.5px dashed var(--line); background: var(--surface); color: var(--muted); transition: all .2s;
+}
+.filters button:hover { border-color: var(--pink); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--pink); color: var(--pink-ink); border: 1.5px solid var(--pink); }
+.filters button span { font-family: var(--mono); font-size: .75rem; opacity: .75; margin-left: 4px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.p {
+  position: relative; background: var(--surface); border: 1.5px solid var(--line); border-radius: 24px; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr; min-width: 0; scroll-margin-top: 90px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.p:hover { transform: translateY(-4px); border-color: var(--pink); box-shadow: var(--shadow); }
+.p:nth-child(3n+1):hover { transform: translateY(-4px) rotate(-.5deg); }
+.p:nth-child(3n+2):hover { transform: translateY(-4px) rotate(.5deg); }
+.p:target { border-color: var(--pink); box-shadow: 0 0 0 4px var(--glow); }
+.p.wide { grid-column: span 2; grid-template-columns: 1.1fr 1fr; grid-template-rows: 1fr; }
+.vis { position: relative; background: var(--sunk); aspect-ratio: 16 / 10; overflow: hidden; max-width: 100%; }
+.p.wide .vis { aspect-ratio: auto; min-height: 240px; }
+.vis img { width: 100%; height: 100%; object-fit: cover; object-position: top; position: absolute; inset: 0; }
+.vis pre {
+  position: absolute; inset: 0; margin: 0; display: grid; place-items: center; padding: 16px;
+  font: .8rem/1.5 var(--mono); color: var(--berry); white-space: pre; overflow: hidden;
+}
+.vis .planet-art { position: absolute; inset: 0; display: grid; place-items: center; }
+.vis .planet-art i { width: 38%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 30%, var(--surface), var(--c) 65%); position: relative; box-shadow: 0 18px 40px -16px var(--c); }
+.vis .planet-art i::after { content: ""; position: absolute; inset: 40% -32%; border: 3px solid var(--c); border-radius: 50%; transform: rotate(-18deg); opacity: .8; }
+.vis .planet-art b { position: absolute; bottom: 14px; left: 16px; font: 500 .72rem var(--mono); color: var(--muted); }
+.body { padding: 20px 22px 22px; display: grid; gap: 10px; align-content: start; }
+.meta { display: flex; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: .74rem; color: var(--berry); }
+.meta time { color: var(--muted); }
+.p h2 { font-size: 1.45rem; font-weight: 800; }
+.p.wide h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem); }
+.p p { color: var(--muted); font-size: .97rem; }
+.p p b { color: var(--ink); font-weight: 600; }
+.links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.links a, .links span {
+  font-weight: 600; font-size: .88rem; text-decoration: none; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--line);
+  transition: border-color .2s, background .2s;
+}
+.links a:hover { border-color: var(--pink); background: var(--sunk); }
+.links a.main { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.links a.main:hover { background: var(--pink); border-color: var(--pink); color: var(--pink-ink); }
+.links span { color: var(--muted); border-style: dashed; font-weight: 500; }
+.p .hand.tagnote { position: absolute; top: 12px; left: 14px; z-index: 2; background: var(--surface); padding: 0 12px 2px; border-radius: 99px; transform: rotate(5deg); font-size: 1.25rem; border: 1.5px solid var(--pink); }
+@media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .p.wide { grid-column: auto; grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .p.wide .vis { aspect-ratio: 16 / 10; min-height: 0; }
+}
+.empty { color: var(--muted); padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html"><span class="logo-orb" aria-hidden="true"></span><span class="lt">hasini<b>verse</b></span></a>
+    <nav aria-label="Main">
+      <a class="home-link" href="index.html">home</a>
+      <a href="projects.html" aria-current="page">projects</a>
+      <a href="about.html">about</a>
+      <a class="hire" href="hire.html">hire me</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">// all 14 planets</span>
+    <h1>everything i've <span class="circled">built</span> (so far)</h1>
+    <p>some were for hackathons, some for grades, and some just because i got curious. all of them taught me something.</p>
+    <p class="hand">the hackathon ones are my faves ♡</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter projects">
+    <button type="button" aria-pressed="true" data-f="all">everything <span>14</span></button>
+    <button type="button" aria-pressed="false" data-f="hackathon">hackathon <span>1</span></button>
+    <button type="button" aria-pressed="false" data-f="ai">ai &amp; ml <span>4</span></button>
+    <button type="button" aria-pressed="false" data-f="web">web apps <span>4</span></button>
+    <button type="button" aria-pressed="false" data-f="systems">systems in c <span>3</span></button>
+    <button type="button" aria-pressed="false" data-f="data">data <span>2</span></button>
+    <button type="button" aria-pressed="false" data-f="fun">just for fun <span>2</span></button>
+  </div>
+
+  <div class="grid" id="grid">
+    <article class="p wide" id="carecircle" data-c="hackathon ai">
+      <div class="vis"><img src="assets/1-proactive-reminder.jpg" alt="CareCircle Alexa+ simulator reminding Margaret to take her medicine" loading="lazy"></div>
+      <div class="body">
+        <span class="hand tagnote">fav!</span>
+        <div class="meta"><span>hackathon · ai agent</span><time>oct 2026</time></div>
+        <h2>CareCircle</h2>
+        <p><b>Alexa+ that remembers, so families don't have to worry.</b> It keeps track of an older person's medicines, mood and sleep, reminds them at the right time, and decides on its own when their kids need to know.</p>
+        <p>Built for Next Byte Hacks V5 and Amazon's Alexa+ hackathon track.</p>
+        <div class="tags"><span class="tag">python</span><span class="tag">mcp server</span><span class="tag">amazon bedrock</span><span class="tag">sqlite</span></div>
+        <div class="links"><a class="main" href="carecircle.html">full story</a><a href="https://carecircle-9d2k.onrender.com/" target="_blank" rel="noopener">live demo ↗</a><a href="https://github.com/hasini0/carecircle" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="lazy-artist" data-c="ai">
+      <div class="vis"><img src="assets/gradcam_shortcut.jpg" alt="Grad-CAM heatmaps showing the network looking at colour" loading="lazy" style="object-fit: contain; background: #fff"></div>
+      <div class="body">
+        <div class="meta"><span>ml research</span><time>sep 2026</time></div>
+        <h2>The Lazy Artist</h2>
+        <p>A CNN that learned to cheat by reading colour instead of shape. I wrote every layer, backprop and Grad-CAM <b>by hand in NumPy</b> to prove it.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/lazyartist" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="research-map" data-c="data">
+      <div class="vis"><canvas id="net" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas></div>
+      <div class="body">
+        <div class="meta"><span>data · team of 3</span><time>oct 2026</time></div>
+        <h2>Research Map</h2>
+        <p>Ten years of papers from S.N. Bose Centre, Bose Institute, SINP and NCBS, as citation and co-author networks in one interactive dashboard.</p>
+        <div class="links"><a class="main" href="https://hasini0.github.io/dpcn_a2/" target="_blank" rel="noopener">open dashboard ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="ultrasound" data-c="ai">
+      <div class="vis"><img src="assets/03_volume_rendering.jpg" alt="3D volume rendering of a heart ultrasound" loading="lazy"></div>
+      <div class="body">
+        <div class="meta"><span>medical imaging</span><time>may 2026</time></div>
+        <h2>FAST Ultrasound</h2>
+        <p>Raw ultrasound in, a beating 3D heart out. Denoising, scan conversion, segmentation and speckle tracking to measure how tissue stretches.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/fastultrasound" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="hospital-robot" data-c="ai">
+      <div class="vis"><pre aria-label="Grid world with start, hazards, wind and goal">S · · ≋ ≋ · ·
+· ✕ · · ≋ · ✕
+· · · ✕ · · ·
+· ✕ · · · ≋ ·
+· · · ✕ · · ♡</pre></div>
+      <div class="body">
+        <div class="meta"><span>ai · reinforcement learning</span><time>jun 2026</time></div>
+        <h2>Hospital Robot</h2>
+        <p>A little delivery robot dodging spills, wind and dying batteries to reach a patient. Solved with A*, then value iteration, then Q-learning.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/hospital_robot" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="felicity" data-c="web">
+      <div class="vis"><pre aria-label="Event ticket">┌──────────────────────┐
+│ FELICITY      ▓▓░▓▓▓ │
+│ team of 4 · hackathon│
+│ ✓ checked in  ▓░▓▓░▓ │
+└──────────────────────┘</pre></div>
+      <div class="body">
+        <div class="meta"><span>web · mern</span><time>may 2026</time></div>
+        <h2>Felicity Events</h2>
+        <p>The whole college fest in one app: team sign-ups, QR check-in at the gate, live team chat and dashboards for organisers.</p>
+        <div class="links"><a class="main" href="https://felicity-assignment1.vercel.app/" target="_blank" rel="noopener">live site ↗</a><a href="https://github.com/hasini0/felicitymanagementsystem" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="print3d" data-c="web">
+      <div class="vis"><div class="planet-art"><i style="--c: var(--peach)"></i><b>cost = material × 1.25 × 1.25 + time</b></div></div>
+      <div class="body">
+        <div class="meta"><span>web · real client · team of 5</span><time>2026</time></div>
+        <h2>3D Print Quoter</h2>
+        <p>A 3D printing centre used to quote by hand from USB sticks. We built a site where you upload an STL, see it in 3D, and get a price and print time instantly.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/3Dprintingmodel" target="_blank" rel="noopener">repo ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="docs" data-c="systems">
+      <div class="vis"><pre aria-label="Two users editing the same document">alice ▸ WRITE notes.txt 2
+        🔒 sentence 2 locked
+bob   ▸ WRITE notes.txt 2
+        ⏳ wait your turn
+alice ▸ ETIRW  ✓ saved</pre></div>
+      <div class="body">
+        <div class="meta"><span>systems · c</span><time>nov 2025</time></div>
+        <h2>Docs++</h2>
+        <p>A tiny Google Docs in C. Many people can edit the same file at once, and sentence-level locks stop them from overwriting each other.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/docs-" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="nfs" data-c="systems">
+      <div class="vis"><pre aria-label="Network file system diagram">client ──▶ naming server
+              │
+     ┌────────┼────────┐
+   SS-1     SS-2     SS-3
+   read     write   stream ♪</pre></div>
+      <div class="body">
+        <div class="meta"><span>systems · c</span><time>nov 2025</time></div>
+        <h2>Network File System</h2>
+        <p>Files spread across storage servers, with a naming server that knows where everything lives. It even streams audio.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/nfs-" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="shell" data-c="systems">
+      <div class="vis"><pre aria-label="Shell prompt">&lt;hasini@iiit:~&gt; reveal -la
+&lt;hasini@iiit:~&gt; hop ..
+&lt;hasini@iiit:/&gt; log execute 2
+&lt;hasini@iiit:/&gt; █</pre></div>
+      <div class="body">
+        <div class="meta"><span>systems · c</span><time>nov 2025</time></div>
+        <h2>My-Shell</h2>
+        <p>My own Unix shell from scratch, with custom commands, a history log and background jobs.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/cshell" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="testing" data-c="web">
+      <div class="vis"><pre aria-label="Test results">test_quickcart.py
+  ✓ cart adds item
+  ✓ 401 without roll no.
+  ✓ 400 on bad header
+  ✕ coupon stacks  ← bug!</pre></div>
+      <div class="body">
+        <div class="meta"><span>software testing</span><time>mar 2026</time></div>
+        <h2>QuickCart Bug Hunt</h2>
+        <p>Black-box tests against a shopping API I couldn't see inside, plus integration tests for a race-management system. Finding bugs is weirdly fun.</p>
+        <div class="links"><span>private repo</span></div>
+      </div>
+    </article>
+
+    <article class="p" id="drought" data-c="data">
+      <div class="vis"><pre aria-label="Rainfall sparklines for three districts">Anantapur  ▂▃▅▂▁▃▆▃
+Kurnool    ▃▂▁▁▂▅▄▂
+Kadapa     ▅▃▂▁▂▃▅▆
+rain · NDVI · SPEI</pre></div>
+      <div class="body">
+        <div class="meta"><span>earth science data</span><time>oct 2026</time></div>
+        <h2>Andhra Drought Study</h2>
+        <p>25 years of rain, satellite greenness and drought index for 7 districts, to see how dry spells hit the crops.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/est-project" target="_blank" rel="noopener">data + code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="phineas" data-c="fun">
+      <div class="vis" style="display:grid;place-items:center"><img src="assets/phineas.png" alt="Phineas sprite from the game" loading="lazy" style="position:static;width:auto;height:72%;object-fit:contain"></div>
+      <div class="body">
+        <div class="meta"><span>game · pygame</span><time>apr 2025</time></div>
+        <h2>Phineas Jump</h2>
+        <p>A little gravity game starring Phineas. My first time making something move on screen, and I was way too happy about it.</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/iss-pygame" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="p" id="space" data-c="fun web">
+      <div class="vis"><div class="planet-art"><i style="--c: var(--lilac)"></i><b>hasiniverse v0.1</b></div></div>
+      <div class="body">
+        <div class="meta"><span>my first website</span><time>apr 2025</time></div>
+        <h2>Hasini's Space</h2>
+        <p>The baby version of this site, with my hometown, my JEE ranks and a little text analyser. Everyone starts somewhere ♡</p>
+        <div class="links"><a class="main" href="https://github.com/hasini0/hasini0.github.io" target="_blank" rel="noopener">code ↗</a></div>
+      </div>
+    </article>
+  </div>
+  <p class="empty" id="empty" hidden>nothing in this orbit yet.</p>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">like something here? <a href="hire.html">let's build yours.</a></p>
+    <small>made with lots of pink ✿ hasini, hyderabad<br><a href="https://github.com/hasini0" target="_blank" rel="noopener">github.com/hasini0</a></small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.filters button');
+  var cards = document.querySelectorAll('.p');
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      buttons.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      var f = b.dataset.f, shown = 0;
+      cards.forEach(function (c) {
+        var on = f === 'all' || c.dataset.c.split(' ').indexOf(f) > -1;
+        c.hidden = !on; if (on) shown++;
+      });
+      document.getElementById('empty').hidden = shown > 0;
+    });
+  });
+
+  // little co-author network for the Research Map card
+  var c = document.getElementById('net'), ctx = c.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var css = getComputedStyle(document.documentElement), nodes = [], edges = [], W, H;
+  var rand = (function (s) { return function () { s = (s * 16807) % 2147483647; return s / 2147483647; }; })(23);
+  [[.28, .4], [.7, .34], [.5, .74]].forEach(function (h, g) {
+    var hub = nodes.length;
+    nodes.push({ x: h[0], y: h[1], r: 6, hub: true, g: g, p: rand() * 6 });
+    for (var k = 0; k < 10; k++) {
+      var a = rand() * Math.PI * 2, d = .08 + rand() * .14;
+      nodes.push({ x: h[0] + Math.cos(a) * d, y: h[1] + Math.sin(a) * d * 1.4, r: 2 + rand() * 2.5, g: g, p: rand() * 6 });
+      edges.push([nodes.length - 1, hub]);
+    }
+  });
+  for (var e = 0; e < 18; e++) { var a1 = Math.floor(rand() * nodes.length), b1 = Math.floor(rand() * nodes.length); if (a1 !== b1) edges.push([a1, b1]); }
+  function size() { var dpr = window.devicePixelRatio || 1; W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function draw(t) {
+    var v = function (n) { return css.getPropertyValue(n).trim(); };
+    ctx.clearRect(0, 0, W, H);
+    var pos = nodes.map(function (n) { return [n.x * W + (reduce ? 0 : Math.sin(t / 1400 + n.p) * 3), n.y * H + (reduce ? 0 : Math.cos(t / 1700 + n.p) * 3)]; });
+    ctx.lineWidth = 1; ctx.strokeStyle = v('--line');
+    edges.forEach(function (e) { ctx.beginPath(); ctx.moveTo(pos[e[0]][0], pos[e[0]][1]); ctx.lineTo(pos[e[1]][0], pos[e[1]][1]); ctx.stroke(); });
+    nodes.forEach(function (n, k) { ctx.beginPath(); ctx.arc(pos[k][0], pos[k][1], n.r, 0, Math.PI * 2); ctx.fillStyle = n.hub ? v('--pink') : (n.g % 2 ? v('--lilac') : v('--berry')); ctx.fill(); });
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); window.addEventListener('resize', size); requestAnimationFrame(draw);
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

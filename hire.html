@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hire Hasini · Hasiniverse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+:root { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
+.offers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.offer { position: relative; padding: 26px; border-radius: 26px; background: var(--surface); border: 1.5px solid var(--line); display: grid; grid-template-columns: 64px 1fr; gap: 18px; overflow: hidden; transition: border-color .3s, transform .3s; }
+.offer:hover { border-color: var(--pink); transform: translateY(-3px); }
+.offer .ball { width: 56px; height: 56px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, var(--surface), var(--c) 68%); position: relative; box-shadow: 0 10px 22px -10px var(--c); }
+.offer .ball::after { content: ""; position: absolute; inset: 40% -30%; border: 2px solid var(--c); border-radius: 50%; transform: rotate(-20deg); opacity: .7; }
+.offer h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 6px; }
+.offer p { color: var(--muted); }
+.offer .proof { margin-top: 10px; font-family: var(--hand); font-size: 1.3rem; color: var(--pink); }
+.offer .proof a { text-decoration-style: wavy; text-underline-offset: 4px; }
+@media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; position: relative; }
+.steps li::before { content: counter(s); font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--pink); }
+.steps li:not(:last-child)::after { content: ""; position: absolute; top: 18px; left: 46px; right: -6px; border-top: 2px dashed var(--line); }
+.steps h3 { font-size: 1.1rem; font-weight: 700; }
+.steps p { color: var(--muted); font-size: .95rem; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr 1fr; } .steps li::after { display: none; } }
+@media (max-width: 420px) { .steps { grid-template-columns: 1fr; } }
+
+/* message builder */
+.builder { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; background: var(--surface); border: 1.5px dashed var(--pink); border-radius: 30px; padding: clamp(20px, 4vw, 36px); }
+.builder fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
+.builder legend { font-weight: 600; margin-bottom: 8px; }
+.picks { display: flex; flex-wrap: wrap; gap: 8px; }
+.picks label { cursor: pointer; }
+.picks input { position: absolute; opacity: 0; pointer-events: none; }
+.picks span { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--line); font-size: .92rem; transition: all .2s; }
+.picks input:checked + span { background: var(--pink); color: var(--pink-ink); border-color: var(--pink); }
+.picks input:focus-visible + span { outline: 3px solid var(--pink); outline-offset: 2px; }
+.left { display: grid; gap: 22px; align-content: start; min-width: 0; }
+.left label.txt { display: grid; gap: 8px; font-weight: 600; }
+.left input[type=text] { font: 1rem var(--body); padding: 11px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
+.left input[type=text]:focus { outline: none; border-color: var(--pink); }
+.right { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.right textarea { width: 100%; min-height: 230px; resize: vertical; font: .95rem/1.6 var(--body); padding: 16px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--sunk); color: var(--ink); }
+.right .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+@media (max-width: 820px) { .builder { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html"><span class="logo-orb" aria-hidden="true"></span><span class="lt">hasini<b>verse</b></span></a>
+    <nav aria-label="Main">
+      <a class="home-link" href="index.html">home</a>
+      <a href="projects.html">projects</a>
+      <a href="about.html">about</a>
+      <a class="hire" href="hire.html" aria-current="page">hire me</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">// internships · remote · projects</span>
+    <h1>let's build something <span class="squiggle">cute</span> and useful</h1>
+    <p>you bring the idea, i bring the code (and probably some pink). small or big, i'm happy to help.</p>
+    <p class="hand">i reply fast, promise ✿</p>
+  </div>
+
+  <section>
+    <div class="offers">
+      <div class="offer"><span class="ball" style="--c: var(--pink)"></span><div><h3>AI agents &amp; chatbots</h3><p>Assistants that remember your users, use your data and tools, and know when to hand off to a human.</p><p class="proof">like <a href="carecircle.html">CareCircle</a></p></div></div>
+      <div class="offer"><span class="ball" style="--c: var(--lilac)"></span><div><h3>Websites &amp; web apps</h3><p>Portfolios, landing pages, or full apps with logins, chat and dashboards. Deployed and live, not just on my laptop.</p><p class="proof">like <a href="projects.html#felicity">Felicity</a> (and this site!)</p></div></div>
+      <div class="offer"><span class="ball" style="--c: var(--peach)"></span><div><h3>Data dashboards</h3><p>I'll collect the data, clean it up, and turn it into charts and maps people actually enjoy clicking around.</p><p class="proof">like the <a href="projects.html#research-map">Research Map</a></p></div></div>
+      <div class="offer"><span class="ball" style="--c: var(--berry)"></span><div><h3>Python scripts &amp; ML</h3><p>Automate the boring stuff, scrape a site, or prototype a model and explain what it learned.</p><p class="proof">like <a href="projects.html#lazy-artist">The Lazy Artist</a></p></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="eyebrow">// how it goes</span><h2>working with me</h2></div>
+    <ol class="steps">
+      <li><h3>you tell me the idea</h3><p>a few lines is enough. what it should do and when you need it.</p></li>
+      <li><h3>i send a plan</h3><p>what i'll build, how long it takes, and what it costs. no surprises.</p></li>
+      <li><h3>you watch it grow</h3><p>i share links you can click as i go, so you can say "more pink" early.</p></li>
+      <li><h3>it's yours</h3><p>live, working, with the code and a short guide on how to use it.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="message">
+    <div class="sec-head"><span class="eyebrow">// say hi</span><h2>write me a message</h2><p>pick what you need, and i'll write the email for you. then just copy it and send it to me.</p></div>
+    <form class="builder" id="builder">
+      <div class="left">
+        <fieldset>
+          <legend>i need…</legend>
+          <div class="picks">
+            <label><input type="checkbox" id="w-site" name="need" value="a website" checked><span>a website</span></label>
+            <label><input type="checkbox" id="w-app" name="need" value="a web app"><span>a web app</span></label>
+            <label><input type="checkbox" id="w-bot" name="need" value="an AI chatbot or agent"><span>an AI chatbot</span></label>
+            <label><input type="checkbox" id="w-dash" name="need" value="a data dashboard"><span>a dashboard</span></label>
+            <label><input type="checkbox" id="w-py" name="need" value="a Python script"><span>a python script</span></label>
+            <label><input type="checkbox" id="w-intern" name="need" value="an intern for my team"><span>an intern</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>by…</legend>
+          <div class="picks">
+            <label><input type="radio" id="t-week" name="when" value="this week"><span>this week</span></label>
+            <label><input type="radio" id="t-month" name="when" value="this month" checked><span>this month</span></label>
+            <label><input type="radio" id="t-flex" name="when" value="whenever, no rush"><span>no rush</span></label>
+          </div>
+        </fieldset>
+        <label class="txt" for="idea">in one line, it's about…
+          <input type="text" id="idea" placeholder="e.g. a booking page for my bakery" autocomplete="off">
+        </label>
+        <label class="txt" for="name">your name
+          <input type="text" id="name" placeholder="e.g. Priya" autocomplete="off">
+        </label>
+      </div>
+      <div class="right">
+        <textarea id="msg" aria-label="Your message, ready to copy"></textarea>
+        <div class="row"><button class="btn btn-primary" type="button" data-copy="#msg">copy message</button></div>
+        <p class="muted" style="font-size:.9rem">then send it to</p>
+        <div class="mailrow"><span class="mail" id="mail">saihasini.d@students.iiit.ac.in</span><button class="btn btn-ghost" type="button" data-copy="#mail">copy email</button></div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">or just browse a bit more. <a href="projects.html">see my planets.</a></p>
+    <small>made with lots of pink ✿ hasini, hyderabad<br><a href="https://github.com/hasini0" target="_blank" rel="noopener">github.com/hasini0</a></small>
+  </div>
+</footer>
+<script>
+(function () {
+  var form = document.getElementById('builder'), msg = document.getElementById('msg');
+  var edited = false;
+  msg.addEventListener('input', function () { edited = true; });
+  function list(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
+  function build() {
+    if (edited) return;
+    var needs = [].map.call(form.querySelectorAll('input[name=need]:checked'), function (i) { return i.value; });
+    var when = (form.querySelector('input[name=when]:checked') || {}).value || 'soon';
+    var idea = document.getElementById('idea').value.trim();
+    var name = document.getElementById('name').value.trim();
+    msg.value = 'Hi Hasini!\n\n' +
+      'I found your site and I\'m looking for ' + (needs.length ? list(needs) : 'some help with a project') + '.' +
+      (idea ? ' It\'s about ' + idea.replace(/\.$/, '') + '.' : '') +
+      '\n\nI\'d like it ' + when + '. Could you send me a plan and a rough price?\n\n' +
+      'Thanks,\n' + (name || '[your name]');
+  }
+  form.addEventListener('input', build);
+  form.addEventListener('change', build);
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  build();
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>
